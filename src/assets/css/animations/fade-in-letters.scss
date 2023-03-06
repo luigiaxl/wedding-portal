@@ -1,0 +1,20 @@
+$blurStartingPoint: 20px;
+$opacityStartingPoint: 0;
+
+span.fade-in-letters{
+  filter: blur($blurStartingPoint);
+  opacity: $opacityStartingPoint;
+  animation: 1.5s forwards ease animatedLetters;
+  display: inline-block;
+}
+
+@keyframes animatedLetters {
+  0%{
+    filter: blur($blurStartingPoint);
+    opacity: $opacityStartingPoint;
+  }
+  100%{
+    filter: blur(0);
+    opacity: 1;
+  }
+}
