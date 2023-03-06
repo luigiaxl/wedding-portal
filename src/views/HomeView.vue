@@ -6,7 +6,6 @@ import FadeInLetters from "@/components/animations/FadeInLetters.vue";
 import CustomLink from "@/components/buttons/CustomLink.vue";
 import MainSection from "@/components/MainSection.vue";
 import CeremonySection from "@/components/home/CeremonySection.vue";
-import ScrollToTop from "@/components/buttons/ScrollToTop.vue";
 import ReceptionSection from "@/components/home/ReceptionSection.vue";
 import ScrollNavs from "@/components/buttons/ScrollNavs.vue";
 
@@ -108,7 +107,6 @@ const scrollToAnchor = (hashbang: string) => {
 
     <ReceptionSection></ReceptionSection>
 
-    <!--    <ScrollToTop class="z-50"></ScrollToTop>-->
     <ScrollNavs
       class="z-40"
       :anchors="['#home', '#ceremony', '#reception']"

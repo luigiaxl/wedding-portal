@@ -35,7 +35,7 @@ const handleNavScroll = () => {
     scrollNavsContainer.value!.style.display = "none";
   }
 
-  props.anchors.forEach((anchor: string, index: number) => {
+  props.anchors.forEach((anchor: string) => {
     const el = <HTMLElement>document.querySelector(anchor);
     const screenHeight = window.innerHeight;
     const scrollTrigger = screenHeight * 0.5;

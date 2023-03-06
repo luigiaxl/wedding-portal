@@ -16,13 +16,11 @@ onMounted(() => {
 
   fadeInContainer.value.innerHTML = "";
 
-  Object.values(fadeInContainerInnerText).forEach((letter: string) => {
+  Object.values(fadeInContainerInnerText).forEach(function (letter: string) {
     fadeInContainer.value!.innerHTML += `<span class="fade-in-letters">${letter}</span>`;
   });
 
-  const paraGraphSpans = <Array<HTMLSpanElement>>(
-    fadeInContainer.value.querySelectorAll("span")
-  );
+  const paraGraphSpans = fadeInContainer.value.querySelectorAll("span");
   const wordLength = paraGraphSpans.length;
 
   paraGraphSpans.forEach((span: HTMLSpanElement) => {
