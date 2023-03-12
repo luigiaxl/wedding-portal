@@ -5,7 +5,7 @@ import axios from "axios";
 
 import "./assets/main.scss";
 
-axios.defaults.baseURL = "https://api.wagassalva.com/";
+axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
 const app = createApp(App);
