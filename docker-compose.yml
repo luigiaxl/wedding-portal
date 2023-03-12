@@ -1,0 +1,12 @@
+version: "3.4"
+services:
+  app:
+    container_name: wedding_portal_frontend
+    image: node:18
+    working_dir: /var/www/html/app/
+    entrypoint: /bin/bash
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/var/www/html/app
+    tty: true

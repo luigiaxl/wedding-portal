@@ -1,14 +1,36 @@
 <script lang="ts" setup>
 import { onMounted, ref } from "vue";
+import { useRoute } from "vue-router";
+import axios from "axios";
 
+const route = useRoute();
 const nameContainer = ref<HTMLElement>();
 const imageContainer = ref<HTMLImageElement>();
+const user = ref<{
+  name: string;
+  invite_code: string;
+}>({
+  name: "",
+  invite_code: "",
+});
 
 onMounted(() => {
+  getInvite();
+
   window.addEventListener("resize", handleResize);
 
   imageContainer.value!.onload = handleResize;
 });
+
+const getInvite = () => {
+  const inviteCode = route.params.code;
+
+  if (inviteCode) {
+    axios.get(`/api/invites/${inviteCode}`).then((result) => {
+      user.value = result.data.user;
+    });
+  }
+};
 
 const handleResize = () => {
   const imgHeight = imageContainer.value?.height;
@@ -38,7 +60,12 @@ const handleResize = () => {
       />
 
       <div class="absolute name-container" ref="nameContainer">
-        <p><u>Miakela Ina Rhina Pausal</u></p>
+        <p>
+          <u>{{
+            user.name ||
+            "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+          }}</u>
+        </p>
       </div>
     </div>
   </div>
