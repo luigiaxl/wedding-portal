@@ -20,7 +20,7 @@ import MainSection from "@/components/MainSection.vue";
       <p class="mt-10">Eden, Toril, Davao City</p>
     </div>
 
-    <div class="flex-1 h-full flex items-center justify-center">
+    <div class="flex-1 h-full hidden lg:flex items-center justify-center">
       <div class="translate-y-40 translate-x-10 z-20">
         <img src="/images/home/eden-resaurant1.jpg" alt="" />
       </div>
