@@ -19,7 +19,7 @@ const submitInviteCode = () => {
 
 <template>
   <div class="flex flex-col justify-center my-6 items-center">
-    <p>{{ message }}</p>
+    <p class="text-center">{{ message }}</p>
     <div class="mt-2">
       <form @submit.prevent="submitInviteCode">
         <input
@@ -31,7 +31,7 @@ const submitInviteCode = () => {
       </form>
     </div>
 
-    <p class="mt-2 text-gray-400">
+    <p class="mt-2 text-gray-400 text-center">
       https://wagassalva.com/invitation/&lt;your invite code&gt;
     </p>
   </div>

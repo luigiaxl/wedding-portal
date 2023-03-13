@@ -52,7 +52,7 @@ const scrollToAnchor = (hashbang: string) => {
         >
           <div
             style="font-family: Sassy Frass, serif"
-            class="relative text-9xl text-red-800 w-full w-auto -ml-44"
+            class="relative text-9xl text-red-800 -ml-14"
           >
             <FadeInLetters>Wagas</FadeInLetters>
           </div>
@@ -66,7 +66,7 @@ const scrollToAnchor = (hashbang: string) => {
 
           <div
             style="font-family: Sassy Frass, serif"
-            class="relative text-9xl text-red-800 w-full pr-0 text-center w-auto -mt-14 ml-40"
+            class="relative text-9xl text-red-800 pr-0 text-center w-auto -mt-14 ml-40"
           >
             <FadeInLetters>Salva</FadeInLetters>
           </div>
