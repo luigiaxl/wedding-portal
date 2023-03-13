@@ -14,9 +14,11 @@ import EnterInviteCodePrompt from "@/components/invite_code/EnterInviteCodePromp
 const imgContainer = ref<HTMLDivElement>();
 const imgClass = ref<string>();
 const route = useRoute();
-const { has_user, user } = useUser();
+const { has_user, user, fetchUserByInvite } = useUser();
 
 onMounted(() => {
+  init();
+
   onWindowResize();
 
   window.addEventListener("resize", onWindowResize);
@@ -26,6 +28,16 @@ onMounted(() => {
     scrollToAnchor(hashbang);
   });
 });
+
+const init = () => {
+  const invite_code = localStorage.getItem("invite_code");
+
+  if (route.params.code) {
+    fetchUserByInvite(<string>route.params.code);
+  } else if (invite_code) {
+    fetchUserByInvite(invite_code);
+  }
+};
 
 const onWindowResize = () => {
   if (!imgContainer.value) return;

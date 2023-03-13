@@ -3,7 +3,7 @@ import { onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useUser } from "@/composables/useUser";
 
-const { user, has_user } = useUser();
+const { user, has_user, fetchUserByInvite } = useUser();
 const route = useRoute();
 const nameContainer = ref<HTMLElement>();
 const imageContainer = ref<HTMLImageElement>();
@@ -12,6 +12,14 @@ onMounted(() => {
   window.addEventListener("resize", handleResize);
 
   imageContainer.value!.onload = handleResize;
+
+  const invite_code = localStorage.getItem("invite_code");
+
+  if (route.params.code) {
+    fetchUserByInvite(<string>route.params.code);
+  } else if (invite_code) {
+    fetchUserByInvite(invite_code);
+  }
 });
 
 const handleResize = () => {
