@@ -90,7 +90,7 @@ const scrollToAnchor = (hashbang: string) => {
               v-if="has_user"
               class="mx-6"
               :to="{
-                path: `/invitation/${user.invite_code}`,
+                path: `/invitation/${user ? user.invite_code : ''}`,
               }"
               >Your Invitation</CustomLink
             >
