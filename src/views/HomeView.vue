@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { nextTick, onMounted, ref } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 import FadeInLetters from "@/components/animations/FadeInLetters.vue";
 import CustomLink from "@/components/buttons/CustomLink.vue";
@@ -14,6 +14,7 @@ import EnterInviteCodePrompt from "@/components/invite_code/EnterInviteCodePromp
 const imgContainer = ref<HTMLDivElement>();
 const imgClass = ref<string>();
 const route = useRoute();
+const router = useRouter();
 const { has_user, user, fetchUserByInvite } = useUser();
 
 onMounted(() => {
@@ -35,7 +36,9 @@ const init = () => {
   if (route.params.code) {
     fetchUserByInvite(<string>route.params.code);
   } else if (invite_code) {
-    fetchUserByInvite(invite_code);
+    fetchUserByInvite(invite_code).finally(() => {
+      router.push({ name: "validatecode", params: { code: invite_code } });
+    });
   }
 };
 

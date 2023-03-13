@@ -1,9 +1,11 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import { useUser } from "@/composables/useUser";
+import { useRouter } from "vue-router";
 
 const { fetchUserByInvite } = useUser();
 const inviteCode = ref<string>();
+const router = useRouter();
 
 interface Props {
   message: string;
@@ -13,7 +15,9 @@ withDefaults(defineProps<Props>(), {
 });
 
 const submitInviteCode = () => {
-  fetchUserByInvite(inviteCode.value || "");
+  fetchUserByInvite(inviteCode.value || "").finally(() => {
+    router.push({ name: "validatecode", params: { code: inviteCode.value } });
+  });
 };
 </script>
 
