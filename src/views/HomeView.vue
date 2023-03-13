@@ -8,10 +8,13 @@ import MainSection from "@/components/MainSection.vue";
 import CeremonySection from "@/components/home/CeremonySection.vue";
 import ReceptionSection from "@/components/home/ReceptionSection.vue";
 import ScrollNavs from "@/components/buttons/ScrollNavs.vue";
+import { useUser } from "@/composables/useUser";
+import EnterInviteCodePrompt from "@/components/invite_code/EnterInviteCodePrompt.vue";
 
 const imgContainer = ref<HTMLDivElement>();
 const imgClass = ref<string>();
 const route = useRoute();
+const { has_user, user } = useUser();
 
 onMounted(() => {
   onWindowResize();
@@ -49,7 +52,7 @@ const scrollToAnchor = (hashbang: string) => {
         >
           <div
             style="font-family: Sassy Frass, serif"
-            class="relative text-9xl text-red-800 w-full lg:w-auto lg:-ml-44"
+            class="relative text-9xl text-red-800 w-full w-auto -ml-44"
           >
             <FadeInLetters>Wagas</FadeInLetters>
           </div>
@@ -63,7 +66,7 @@ const scrollToAnchor = (hashbang: string) => {
 
           <div
             style="font-family: Sassy Frass, serif"
-            class="relative text-9xl text-red-800 w-full text-end pr-4 lg:pr-0 lg:text-center lg:w-auto -mt-14 lg:ml-40"
+            class="relative text-9xl text-red-800 w-full pr-0 text-center w-auto -mt-14 ml-40"
           >
             <FadeInLetters>Salva</FadeInLetters>
           </div>
@@ -83,8 +86,21 @@ const scrollToAnchor = (hashbang: string) => {
               @click.prevent="scrollToAnchor('#ceremony')"
               >Details</CustomLink
             >
-            <CustomLink class="mx-6" to="/">Invitations</CustomLink>
+            <CustomLink
+              v-if="has_user"
+              class="mx-6"
+              :to="{
+                path: `/invitation/${user.invite_code}`,
+              }"
+              >Your Invitation</CustomLink
+            >
           </nav>
+
+          <EnterInviteCodePrompt
+            v-if="!has_user"
+            class="mt-16"
+            message="To view your invitation, enter your invite code:"
+          ></EnterInviteCodePrompt>
         </div>
       </div>
 

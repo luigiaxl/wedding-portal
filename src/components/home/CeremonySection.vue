@@ -1,5 +1,9 @@
 <script lang="ts" setup>
 import MainSection from "@/components/MainSection.vue";
+import { useUser } from "@/composables/useUser";
+import EnterInviteCodePrompt from "@/components/invite_code/EnterInviteCodePrompt.vue";
+
+const { has_user } = useUser();
 </script>
 
 <template>
@@ -16,11 +20,15 @@ import MainSection from "@/components/MainSection.vue";
         The Ceremony
       </h2>
 
-      <p class="mt-20">TUESDAY, APRIL 18, 2023</p>
-      <p>AT 2:30 PM</p>
+      <div v-if="has_user" class="flex flex-col justify-center items-center">
+        <p class="mt-20">TUESDAY, APRIL 18, 2023</p>
+        <p>AT 2:30 PM</p>
 
-      <p class="mt-20">St. Michael The Archangel Chapel</p>
-      <p>Purok 4, Eden, Toril, Davao City</p>
+        <p class="mt-20">St. Michael The Archangel Chapel</p>
+        <p>Purok 4, Eden, Toril, Davao City</p>
+      </div>
+
+      <EnterInviteCodePrompt v-else></EnterInviteCodePrompt>
     </div>
   </MainSection>
 </template>

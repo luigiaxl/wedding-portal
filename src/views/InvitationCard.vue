@@ -1,36 +1,18 @@
 <script lang="ts" setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
-import axios from "axios";
+import { useUser } from "@/composables/useUser";
 
+const { user, has_user } = useUser();
 const route = useRoute();
 const nameContainer = ref<HTMLElement>();
 const imageContainer = ref<HTMLImageElement>();
-const user = ref<{
-  name: string;
-  invite_code: string;
-}>({
-  name: "",
-  invite_code: "",
-});
 
 onMounted(() => {
-  getInvite();
-
   window.addEventListener("resize", handleResize);
 
   imageContainer.value!.onload = handleResize;
 });
-
-const getInvite = () => {
-  const inviteCode = route.params.code;
-
-  if (inviteCode) {
-    axios.get(`/api/invites/${inviteCode}`).then((result) => {
-      user.value = result.data.user;
-    });
-  }
-};
 
 const handleResize = () => {
   const imgHeight = imageContainer.value?.height;
@@ -59,8 +41,8 @@ const handleResize = () => {
         width="790"
       />
 
-      <div class="absolute name-container" ref="nameContainer">
-        <p>
+      <div class="absolute name-container text-gray-900" ref="nameContainer">
+        <p v-if="has_user">
           <u>{{
             user.name ||
             "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
@@ -68,5 +50,9 @@ const handleResize = () => {
         </p>
       </div>
     </div>
+  </div>
+
+  <div class="flex justify-center">
+    For more details, visit: <a href="https://wagassalva.com">wagassalva.com</a>
   </div>
 </template>
